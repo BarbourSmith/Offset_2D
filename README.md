@@ -4,6 +4,12 @@
 
 ![](/project.svg)
 
+## Inputs
+
+- **2D_Shape** (geometry)
+- **Offset** (number)
+
+
 
 
  
