@@ -29,10 +29,25 @@
       ]
     },
     {
+      "atomType": "Input",
+      "x": 0.025384615384615384,
+      "y": 0.15384615384615385,
+      "uniqueID": "id-657",
+      "name": "2D_Shape",
+      "type": "geometry"
+    },
+    {
+      "atomType": "Input",
+      "x": 0.025384615384615384,
+      "y": 0.24615384615384617,
+      "uniqueID": "id-660",
+      "name": "Offset"
+    },
+    {
       "atomType": "Code",
-      "x": 0.46835443037974683,
-      "y": 0.5654596100278552,
-      "uniqueID": "id-637",
+      "x": 0.49007936507936506,
+      "y": 0.44011142061281333,
+      "uniqueID": "id-671",
       "ioValues": [
         {
           "name": "shape",
@@ -43,40 +58,26 @@
           "ioValue": 10
         }
       ],
-      "codeVersion": 1,
-      "code": "const Inputs = [\n  { inputName: \"shape\", type: \"geometry\", defaultValue: null },\n  { inputName: \"distance\", type: \"number\", defaultValue: 1 },\n];\n\nreturn await AssemblyMap(library[shape], async (leaf) => {\n  const drawing = leaf.geometry[0];\n  return {\n    ...leaf,\n    geometry: [drawing.offset(distance)]\n  };\n});\n"
-    },
-    {
-      "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.5403899721448467,
-      "uniqueID": "id-657",
-      "name": "2D_Shape",
-      "type": "geometry"
-    },
-    {
-      "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.7883008356545962,
-      "uniqueID": "id-660",
-      "name": "Offset"
+      "interpreterVersion": 1,
+      "code": "function run(shape: Assembly, distance: number = 1): Assembly {\n  return shape.onLeafs((leaf) => {\n    leaf.geometry = leaf.geometry.offset(distance);\n    return leaf;\n  }) as Assembly;\n}",
+      "compiledCode": "\"use strict\";\nfunction run(shape, distance = 1) {\n    return shape.onLeafs((leaf) => {\n        leaf.geometry = leaf.geometry.offset(distance);\n        return leaf;\n    });\n}\n"
     }
   ],
   "allConnectors": [
     {
-      "ap2Name": "number or geometry",
-      "ap1ID": "id-637",
-      "ap2ID": "id-632"
-    },
-    {
       "ap2Name": "shape",
       "ap1ID": "id-657",
-      "ap2ID": "id-637"
+      "ap2ID": "id-671"
     },
     {
       "ap2Name": "distance",
       "ap1ID": "id-660",
-      "ap2ID": "id-637"
+      "ap2ID": "id-671"
+    },
+    {
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-671",
+      "ap2ID": "id-632"
     }
   ],
   "unitsKey": "MM",
