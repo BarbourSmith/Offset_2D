@@ -18,7 +18,7 @@
   "allAtoms": [
     {
       "atomType": "Output",
-      "x": 0.98,
+      "x": 1,
       "y": 0.5,
       "uniqueID": "id-632",
       "ioValues": [
@@ -30,23 +30,25 @@
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.29526462395543174,
+      "x": 0,
+      "y": 0.2,
       "uniqueID": "id-657",
       "name": "2D_Shape",
-      "type": "geometry"
+      "type": "geometry",
+      "options": []
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.6768802228412256,
+      "x": 0,
+      "y": 0.2,
       "uniqueID": "id-660",
-      "name": "Offset"
+      "name": "Offset",
+      "options": []
     },
     {
       "atomType": "Code",
-      "x": 0.49007936507936506,
-      "y": 0.44011142061281333,
+      "x": 0.5,
+      "y": 0.4,
       "uniqueID": "id-671",
       "ioValues": [
         {
@@ -59,8 +61,8 @@
         }
       ],
       "interpreterVersion": 1,
-      "code": "function run(shape: Assembly, distance: number = 1): Assembly {\n  return shape.onLeafs((leaf) => {\n    leaf.geometry = leaf.geometry.offset(distance);\n    return leaf;\n  }) as Assembly;\n}",
-      "compiledCode": "\"use strict\";\nfunction run(shape, distance = 1) {\n    return shape.onLeafs((leaf) => {\n        leaf.geometry = leaf.geometry.offset(distance);\n        return leaf;\n    });\n}\n"
+      "code": "function run(shape: Assembly, distance: number = 1): Assembly {\n  const total = shape.leafCount();\n  let done = 0;\n  progress(`offsetting ${total} parts`);\n  return shape.onLeafs((leaf) => {\n    progress(`offsetting part ${done + 1}/${total}`);\n    leaf.geometry = leaf.geometry.offset(distance);\n    done++;\n    return leaf;\n  }) as Assembly;\n}",
+      "compiledCode": "\"use strict\";\nfunction run(shape, distance = 1) {\n    const total = shape.leafCount();\n    let done = 0;\n    progress(`offsetting ${total} parts`);\n    return shape.onLeafs((leaf) => {\n        progress(`offsetting part ${done + 1}/${total}`);\n        leaf.geometry = leaf.geometry.offset(distance);\n        done++;\n        return leaf;\n    });\n}\n"
     }
   ],
   "allConnectors": [
