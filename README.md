@@ -2,7 +2,7 @@
 
 # Offset_2D
 
-![](/project.svg)
+![](/project.png)
 
 ## Inputs
 
